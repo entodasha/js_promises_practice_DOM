@@ -36,7 +36,7 @@ let isRight = false;
 let isLeft = false;
 
 const thirdPromise = new Promise((resolve) => {
-  document.addEventListener('mousedown', (e) => {
+  const handleMouseDown = (e) => {
     e.preventDefault();
 
     if (e.button === 0) {
@@ -49,8 +49,12 @@ const thirdPromise = new Promise((resolve) => {
 
     if (isLeft && isRight) {
       resolve(`Third promise was resolved`);
+
+      document.removeEventListener('mousedown', handleMouseDown);
     }
-  });
+  };
+
+  document.addEventListener('mousedown', handleMouseDown);
 });
 
 function showNotification(message, type) {
